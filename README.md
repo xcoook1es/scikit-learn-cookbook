@@ -9,8 +9,6 @@ Repositori ini berisi satu Jupyter Notebook untuk setiap bab buku. Setiap notebo
 3. **Penjelasan teori** — konsep matematis di balik setiap metode (rumus, intuisi, asumsi, kelebihan/kekurangan).
 4. **Interpretasi hasil** — pembahasan output yang benar-benar dihasilkan saat notebook dijalankan, ditambah sel verifikasi kecil (misalnya membuktikan rumus OLS atau PCA secara numerik).
 
-Bahasa penjelasan: **Bahasa Indonesia**. Kode mengikuti repositori resmi buku: [PacktPublishing/Scikit-Learn-Cookbook-Third-Edition](https://github.com/PacktPublishing/Scikit-Learn-Cookbook-Third-Edition).
-
 ---
 
 ## Daftar Isi
@@ -75,22 +73,14 @@ scikit-learn-Cookbook/
 ## Cara Menjalankan
 
 ```bash
-git clone https://github.com/<username>/scikit-learn-Cookbook.git
-cd scikit-learn-Cookbook
+git clone https://github.com/xcoook1es/scikit-learn-cookbook.git
+cd scikit-learn-cookbook
 pip install -r requirements.txt
 jupyter notebook
 ```
 
 Atau buka notebook langsung di Google Colab (*File → Open notebook → GitHub*).
 
-## Catatan Reproduksi
-
-- **Bab 1:** repositori resmi buku tidak menyediakan notebook untuk Bab 1 (bab konseptual). Kode di notebook ini disusun mengikuti topik-topik Bab 1.
-- **Bab 2 (latihan):** `fetch_california_housing()` mengunduh dataset dari internet saat pertama kali dijalankan, jadi butuh koneksi internet.
-- **Bab 6:** di scikit-learn versi terbaru, solver `liblinear` tidak lagi mendukung multikelas secara langsung. Model One-vs-Rest dibungkus dengan `OneVsRestClassifier` (perilakunya setara dengan kode buku pada scikit-learn 1.5).
-- **Bab 7:** pada resep evaluasi SVM, kode buku mencetak variabel `accuracy` dari resep sebelumnya; akurasi yang benar dihitung ulang di sel tambahan.
-- Beberapa kode buku memakai bilangan acak tanpa seed (`make_circles` di Bab 4 dan noise di Bab 5). Agar hasil konsisten dengan interpretasi yang ditulis, seed global NumPy diset di sel tambahan sebelum kode tersebut (kode buku tidak diubah).
-- Penjelasan teori disusun dengan bantuan LLM (diperbolehkan oleh ketentuan tugas), lalu dicek terhadap output notebook.
 
 ## Lingkungan
 
