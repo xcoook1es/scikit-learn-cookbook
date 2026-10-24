@@ -23,6 +23,11 @@ Repositori ini berisi satu Jupyter Notebook untuk setiap bab buku. Setiap notebo
 | 06 | [Advanced Logistic Regression and Extensions](Chapter_06_Advanced_Logistic_Regression_and_Extensions/Chapter_06_Advanced_Logistic_Regression_and_Extensions.ipynb) | Regresi logistik, OvR vs multinomial (softmax), regularisasi L1/L2, multilabel, ROC–AUC |
 | 07 | [Support Vector Machines and Kernel Methods](Chapter_07_Support_Vector_Machines_and_Kernel_Methods/Chapter_07_Support_Vector_Machines_and_Kernel_Methods.ipynb) | SVC/SVR, margin & support vector, kernel trick, tuning `C`/`gamma`, data berdimensi tinggi |
 | 08 | [Tree-Based Algorithms and Ensemble Methods](Chapter_08_Tree-Based_Algorithms_and_Ensemble_Methods/Chapter_08_Tree-Based_Algorithms_and_Ensemble_Methods.ipynb) | Decision tree, Random Forest (bagging), Gradient Boosting, stacking, feature importance |
+| 09 | [Text Processing and Multiclass Classification](Chapter_09_Text_Processing_and_Multiclass_Classification/Chapter_09_Text_Processing_and_Multiclass_Classification.ipynb) | Tokenisasi, Bag of Words, TF-IDF, n-gram, POS tagging, Naive Bayes, OvR vs OvO, evaluasi model teks |
+| 10 | [Clustering Techniques](Chapter_10_Clustering_Techniques/Chapter_10_Clustering_Techniques.ipynb) | K-Means, elbow method, agglomerative & dendrogram, DBSCAN, silhouette/Davies–Bouldin/ARI, Spectral Clustering, GMM |
+| 11 | [Novelty and Outlier Detection](Chapter_11_Novelty_and_Outlier_Detection/Chapter_11_Novelty_and_Outlier_Detection.ipynb) | Isolation Forest, Local Outlier Factor, One-Class SVM, evaluasi deteksi anomali, penanganan outlier |
+| 12 | [Cross-Validation and Model Evaluation Techniques](Chapter_12_Cross-Validation_and_Model_Evaluation_Techniques/Chapter_12_Cross-Validation_and_Model_Evaluation_Techniques.ipynb) | K-fold, stratified, LOOCV, nested CV, `cross_validate`, Grid vs Randomized search, learning & validation curve |
+| 13 | [Deploying scikit-learn Models in Production](Chapter_13_Deploying_scikit-learn_Models_in_Production/Chapter_13_Deploying_scikit-learn_Models_in_Production.ipynb) | Serialisasi (pickle/joblib), batch prediction, monitoring & drift, `partial_fit`, versi model & metadata, gerbang CI/CD |
 
 ---
 
@@ -52,6 +57,21 @@ Regresi linear (OLS) dan masalah **multikolinearitas** yang membuat koefisien ti
 ### Bab 8 — Tree-Based Algorithms and Ensemble Methods
 **Pohon keputusan** (CART, Gini/entropi) mudah diinterpretasikan tetapi rawan overfitting. **Random Forest** (bagging + subset fitur acak) menurunkan varians; disertai OOB score dan feature importance (MDI vs permutation). **Gradient Boosting** membangun pohon dangkal secara berurutan mengikuti gradien loss untuk menurunkan bias. Bab ditutup dengan tuning hyperparameter dan perbandingan bagging vs boosting vs **stacking**.
 
+### Bab 9 — Text Processing and Multiclass Classification
+Mengubah teks menjadi angka: tokenisasi, penghapusan stopword, dan **Bag of Words** (`CountVectorizer`) yang menghasilkan matriks dokumen–kata berdimensi tinggi dan sangat sparse. **TF-IDF** menurunkan bobot kata yang umum di banyak dokumen dan menormalkan panjang dokumen; *word embedding* dibahas sebagai pendekatan yang menangkap makna. Fitur tambahan berupa **n-gram**, **POS tagging**, dan NER. Klasifikasi teks dengan **Multinomial Naive Bayes**, SVM, dan regresi logistik (korpus NLTK Brown, Reuters, movie_reviews), strategi multikelas **One-vs-Rest vs One-vs-One**, serta evaluasi dengan precision/recall/F1 — termasuk eksperimen yang menunjukkan bahwa SVM linear jauh lebih cocok untuk teks daripada SVM RBF.
+
+### Bab 10 — Clustering Techniques
+*Unsupervised learning* untuk mengelompokkan data tanpa label. **K-Means** (algoritma Lloyd, k-means++, elbow method), **hierarchical/agglomerative clustering** (linkage Ward/single/complete/average, dendrogram), dan **DBSCAN** (cluster berbasis kepadatan, deteksi noise, k-distance plot). Evaluasi dengan **silhouette**, **Davies–Bouldin**, **Calinski–Harabasz**, dan **Adjusted Rand Index**. Bab ini juga membandingkan algoritma pada data berbentuk gumpalan, bulan sabit, dan lingkaran, lalu membahas **Spectral Clustering** (berbasis graf) dan **Gaussian Mixture Model** (EM, *soft clustering*, pemilihan komponen dengan BIC).
+
+### Bab 11 — Novelty and Outlier Detection
+Membedakan **outlier detection** (data latih sudah tercampur anomali) dan **novelty detection** (dilatih pada data normal saja). **Isolation Forest** mengisolasi anomali dengan pemisahan acak (jalur pendek = anomali), **Local Outlier Factor** membandingkan kepadatan lokal titik dengan tetangganya, dan **One-Class SVM** mempelajari batas wilayah normal dengan kernel. Bab ini juga membahas evaluasi deteksi anomali (precision/recall kelas outlier, ROC–AUC, PR-AUC), strategi menangani outlier (hapus, ganti median, winsorization, flagging), serta panduan memilih metode.
+
+### Bab 12 — Cross-Validation and Model Evaluation Techniques
+Estimasi performa yang jujur: **k-fold** dan **stratified k-fold**, **LOOCV**, dan **nested cross-validation** untuk tuning tanpa bias seleksi. API `cross_val_score`, `cross_validate` (banyak metrik sekaligus), **GridSearchCV** vs **RandomizedSearchCV** (dengan distribusi log-uniform), serta diagnosis bias–varians dengan **learning curve** dan **validation curve**.
+
+### Bab 13 — Deploying scikit-learn Models in Production
+Siklus hidup model setelah dilatih: **serialisasi** dengan `pickle`/`joblib` (beserta isu keamanan dan kompatibilitas versi), skalabilitas dengan `n_jobs` dan **prediksi batch**, **monitoring** penurunan performa akibat data/concept drift dan pembaruan inkremental dengan `partial_fit`, **versi model dan metadata**, serta **pipeline CI/CD** dengan gerbang kualitas otomatis. Notebook ini juga menandai beberapa kelemahan pada kode contoh buku (data validasi yang bocor dari data latih, metadata versi yang ditulis manual, dan data uji CI berupa angka acak) beserta versi perbaikannya.
+
 ---
 
 ## Struktur Repositori
@@ -67,7 +87,12 @@ scikit-learn-Cookbook/
 ├── Chapter_05_Linear_Models_and_Regularization/
 ├── Chapter_06_Advanced_Logistic_Regression_and_Extensions/
 ├── Chapter_07_Support_Vector_Machines_and_Kernel_Methods/
-└── Chapter_08_Tree-Based_Algorithms_and_Ensemble_Methods/
+├── Chapter_08_Tree-Based_Algorithms_and_Ensemble_Methods/
+├── Chapter_09_Text_Processing_and_Multiclass_Classification/
+├── Chapter_10_Clustering_Techniques/
+├── Chapter_11_Novelty_and_Outlier_Detection/
+├── Chapter_12_Cross-Validation_and_Model_Evaluation_Techniques/
+└── Chapter_13_Deploying_scikit-learn_Models_in_Production/
 ```
 
 ## Cara Menjalankan
@@ -77,6 +102,15 @@ git clone https://github.com/xcoook1es/scikit-learn-cookbook.git
 cd scikit-learn-cookbook
 pip install -r requirements.txt
 jupyter notebook
+```
+
+**Bab 9** memakai korpus NLTK. Unduh sekali sebelum menjalankan notebook:
+
+```python
+import nltk
+for p in ['movie_reviews', 'reuters', 'brown', 'punkt', 'punkt_tab',
+          'stopwords', 'averaged_perceptron_tagger_eng']:
+    nltk.download(p)
 ```
 
 Atau buka notebook langsung di Google Colab (*File → Open notebook → GitHub*).
